@@ -1,39 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Do You Love Me?</title>
+    <title>Hello There</title>
     <style>
         /* Style the entire body element */
         body {
-            margin: 0; /* Remove default margin */
-            padding: 0; /* Remove default padding */
-            overflow: hidden; /* Prevent content from overflowing the screen */
-            background-image: url("bg.jpg"); /* Path to your background image */
-            background-size: cover; /* Scale image to cover container */
-            background-position: center; /* Center image horizontally and vertically */
-            background-repeat: no-repeat; /* Prevent image repetition */
-            height: 100vh; /* Set body height to 100% viewport height */
+            margin: 0;
+            /* Remove default margin */
+            padding: 0;
+            /* Remove default padding */
+            overflow: hidden;
+            /* Prevent content from overflowing the screen */
+            background-image: url("bg.jpg");
+            /* Path to your background image */
+            background-size: cover;
+            /* Scale image to cover container */
+            background-position: center;
+            /* Center image horizontally and vertically */
+            background-repeat: no-repeat;
+            /* Prevent image repetition */
+            height: 100vh;
+            /* Set body height to 100% viewport height */
+            position: relative;
+            /* Make body relative to contain absolutely positioned elements */
         }
-        
+
         #game-container {
-            position: absolute; /* Position absolutely for flexible placement */
-            top: 50%; /* Center vertically (halfway down the screen) */
-            left: 50%; /* Center horizontally (halfway from the left) */
-            transform: translate(-50%, -50%);  /* Adjust position based on width/height */
-            width: 500px; /* Set a fixed width */
-            height: 600px; /* Set a fixed height */
-            border: 2px solid #ae003d; /* Border style */
-            box-sizing: border-box; /* Include border in width/height calculations */
-            background: rgba(0, 0, 0, 0.2); /* Semi-transparent black background */
-            backdrop-filter: blur(10px); /* Apply blur effect with 10px intensity */
+            position: absolute;
+            /* Position absolutely for flexible placement */
+            top: 50%;
+            /* Center vertically (halfway down the screen) */
+            left: 50%;
+            /* Center horizontally (halfway from the left) */
+            transform: translate(-50%, -50%);
+            /* Adjust position based on width/height */
+            width: 500px;
+            /* Set a fixed width */
+            height: 600px;
+            /* Set a fixed height */
+            border: 2px solid #ae003d;
+            /* Border style */
+            box-sizing: border-box;
+            /* Include border in width/height calculations */
+            background: rgba(0, 0, 0, 0.2);
+            /* Semi-transparent black background */
+            backdrop-filter: blur(5px);
+            /* Apply blur effect with 10px intensity */
             /* Optional: Adjust blur intensity (higher value = stronger blur) */
+            z-index: 1;
+            /* Ensure game container is above other elements */
         }
-        
-        #yes{
-            position: inherit; /* Absolute positioning within the container */
-            left: 200px; /* Initial position */
+
+        #yes {
+            position: inherit;
+            /* Absolute positioning within the container */
+            left: 200px;
+            /* Initial position */
             background-color: rgb(255, 0, 0);
             border: none;
             width: 90px;
@@ -41,12 +66,16 @@
             font-size: 25px;
             padding: 8px;
             cursor: pointer;
-            transition: top 0.5s, left 0.5s; /* Smooth movement */
+            transition: top 0.5s, left 0.5s;
+            /* Smooth movement */
             text-align: center;
         }
+
         #target {
-            position: absolute; /* Absolute positioning within the container */
-            left: 200px; /* Initial position */
+            position: absolute;
+            /* Absolute positioning within the container */
+            left: 200px;
+            /* Initial position */
             background-color: rgb(0, 89, 255);
             border: none;
             width: 90px;
@@ -54,21 +83,106 @@
             font-size: 25px;
             padding: 8px;
             cursor: pointer;
-            transition: top 0.5s, left 0.5s; /* Smooth movement */
+            transition: top 0.5s, left 0.5s;
+            /* Smooth movement */
             text-align: center;
         }
+
+        /* Popup message style */
+        #popup-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            z-index: 2;
+            animation: fadeInOut 3s forwards;
+            text-align: center;
+            /* Animation for fading in and out */
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Heart animation */
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.3);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: red;
+            font-size: 50px;
+            animation: heartbeat 1s infinite;
+            z-index: 0;
+            /* Ensure hearts are behind other elements */
+        }
+        .watermark {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+            font-size: 12px;
+        }
+        .Title{
+            text-align: center;
+        }
+        
     </style>
 </head>
+
 <body>
     <div id="game-container">
         <div class="box">
-            <h1>Do you love me? 💗</h1>
+            <div class="Title">
+                <h1>Do you love me? 💗</h1>
+            </div>
             <button id="target">No</button>
             <button id="yes">Yes</button>
         </div>
     </div>
+
+    <!-- Popup message -->
+    <div id="popup-message">
+        <h2>"You're the missing piece to my puzzle. I love you too!💖💖💖"</h2>
+        <h3>Thank you for expressing your feelings.</h3>
+    </div>
+
+    <!-- Heart animation -->
+    <div class="heart">&#10084;</div>
+    <div class="watermark">Developed by Fardeen Ansari</div>
     <script>
-        // Corrected variable name: maxHeight
         const maxHeight = 400; // Not used in this code, but kept for reference
 
         function moveTarget() {
@@ -92,9 +206,38 @@
         }
 
         const target = document.getElementById('target');
+        const yesButton = document.getElementById('yes');
+        const popupMessage = document.getElementById('popup-message');
 
         // Attach event listener securely using addEventListener
         target.addEventListener('mouseenter', moveTarget);
+
+        // Event listener for 'Yes' button click
+        yesButton.addEventListener('click', function () {
+            // Show popup message
+            popupMessage.style.display = 'block';
+
+            // Hide popup message after 3 seconds
+            setTimeout(function () {
+
+                // Start fading out animation
+                popupMessage.style.animationPlayState = 'running';
+            }, 10);
+
+            // Remove popup message after animation completes
+            setTimeout(function () {
+                popupMessage.style.display = 'none';
+            }, 3000);
+
+            // Heart animation for an impression
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            document.body.appendChild(heart);
+            setTimeout(() => {
+                heart.remove();
+            }, 2000); // Remove heart after 2 seconds
+        });
     </script>
 </body>
+
 </html>
