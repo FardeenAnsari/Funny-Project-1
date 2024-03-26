@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do You Love Me?</title>
+    <style>
+        /* Style the entire body element */
+        body {
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            overflow: hidden; /* Prevent content from overflowing the screen */
+            background-image: url("bg.jpg"); /* Path to your background image */
+            background-size: cover; /* Scale image to cover container */
+            background-position: center; /* Center image horizontally and vertically */
+            background-repeat: no-repeat; /* Prevent image repetition */
+            height: 100vh; /* Set body height to 100% viewport height */
+        }
+        
+        #game-container {
+            position: absolute; /* Position absolutely for flexible placement */
+            top: 50%; /* Center vertically (halfway down the screen) */
+            left: 50%; /* Center horizontally (halfway from the left) */
+            transform: translate(-50%, -50%);  /* Adjust position based on width/height */
+            width: 500px; /* Set a fixed width */
+            height: 600px; /* Set a fixed height */
+            border: 2px solid #ae003d; /* Border style */
+            box-sizing: border-box; /* Include border in width/height calculations */
+            background: rgba(0, 0, 0, 0.2); /* Semi-transparent black background */
+            backdrop-filter: blur(10px); /* Apply blur effect with 10px intensity */
+            /* Optional: Adjust blur intensity (higher value = stronger blur) */
+        }
+        
+        #yes{
+            position: inherit; /* Absolute positioning within the container */
+            left: 200px; /* Initial position */
+            background-color: rgb(255, 0, 0);
+            border: none;
+            width: 90px;
+            border-radius: 10px;
+            font-size: 25px;
+            padding: 8px;
+            cursor: pointer;
+            transition: top 0.5s, left 0.5s; /* Smooth movement */
+            text-align: center;
+        }
+        #target {
+            position: absolute; /* Absolute positioning within the container */
+            left: 200px; /* Initial position */
+            background-color: rgb(0, 89, 255);
+            border: none;
+            width: 90px;
+            border-radius: 10px;
+            font-size: 25px;
+            padding: 8px;
+            cursor: pointer;
+            transition: top 0.5s, left 0.5s; /* Smooth movement */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div class="box">
+            <h1>Do you love me? 💗</h1>
+            <button id="target">No</button>
+            <button id="yes">Yes</button>
+        </div>
+    </div>
+    <script>
+        // Corrected variable name: maxHeight
+        const maxHeight = 400; // Not used in this code, but kept for reference
+
+        function moveTarget() {
+            // Calculate max coordinates considering container size (within container)
+            const containerWidth = document.getElementById('game-container').offsetWidth;
+            const containerHeight = document.getElementById('game-container').offsetHeight;
+            const buttonWidth = document.getElementById('target').offsetWidth;
+            const buttonHeight = document.getElementById('target').offsetHeight;
+
+            // Ensure safe movement area within container boundaries
+            const maxWidth = containerWidth - buttonWidth - 20;
+            const maxHeight = containerHeight - buttonHeight - 20;
+
+            // Generate random coordinates within the safe area
+            const randomX = Math.floor(Math.random() * maxWidth);
+            const randomY = Math.floor(Math.random() * maxHeight);
+
+            // Ensure the target stays within the container boundaries
+            target.style.left = randomX + 'px';
+            target.style.top = randomY + 'px';
+        }
+
+        const target = document.getElementById('target');
+
+        // Attach event listener securely using addEventListener
+        target.addEventListener('mouseenter', moveTarget);
+    </script>
+</body>
+</html>
