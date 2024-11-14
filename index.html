@@ -6,59 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello There</title>
     <style>
+        /* Define the hue rotation animation */
+        @keyframes hueRotation {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+
         /* Style the entire body element */
         body {
             margin: 0;
-            /* Remove default margin */
             padding: 0;
-            /* Remove default padding */
             overflow: hidden;
-            /* Prevent content from overflowing the screen */
             background-image: url("bg.jpg");
-            /* Path to your background image */
             background-size: cover;
-            /* Scale image to cover container */
             background-position: center;
-            /* Center image horizontally and vertically */
             background-repeat: no-repeat;
-            /* Prevent image repetition */
             height: 100vh;
-            /* Set body height to 100% viewport height */
             position: relative;
-            /* Make body relative to contain absolutely positioned elements */
+            /* Apply the hue rotation animation */
+            animation: hueRotation 10s linear infinite;
         }
 
         #game-container {
             position: absolute;
-            /* Position absolutely for flexible placement */
             top: 50%;
-            /* Center vertically (halfway down the screen) */
             left: 50%;
-            /* Center horizontally (halfway from the left) */
             transform: translate(-50%, -50%);
-            /* Adjust position based on width/height */
             width: 500px;
-            /* Set a fixed width */
             height: 600px;
-            /* Set a fixed height */
             border: 2px solid #ae003d;
-            /* Border style */
             box-sizing: border-box;
-            /* Include border in width/height calculations */
             background: rgba(0, 0, 0, 0.2);
-            /* Semi-transparent black background */
             backdrop-filter: blur(5px);
-            /* Apply blur effect with 10px intensity */
-            /* Optional: Adjust blur intensity (higher value = stronger blur) */
             z-index: 1;
-            /* Ensure game container is above other elements */
         }
 
         #yes {
             position: inherit;
-            /* Absolute positioning within the container */
             left: 200px;
-            /* Initial position */
             background-color: rgb(255, 0, 0);
             border: none;
             width: 90px;
@@ -67,15 +56,12 @@
             padding: 8px;
             cursor: pointer;
             transition: top 0.5s, left 0.5s;
-            /* Smooth movement */
             text-align: center;
         }
 
         #target {
             position: absolute;
-            /* Absolute positioning within the container */
             left: 200px;
-            /* Initial position */
             background-color: rgb(0, 89, 255);
             border: none;
             width: 90px;
@@ -84,7 +70,6 @@
             padding: 8px;
             cursor: pointer;
             transition: top 0.5s, left 0.5s;
-            /* Smooth movement */
             text-align: center;
         }
 
@@ -101,22 +86,18 @@
             z-index: 2;
             animation: fadeInOut 3s forwards;
             text-align: center;
-            /* Animation for fading in and out */
         }
 
         @keyframes fadeInOut {
             0% {
                 opacity: 0;
             }
-
             10% {
                 opacity: 1;
             }
-
             90% {
                 opacity: 1;
             }
-
             100% {
                 opacity: 0;
             }
@@ -127,11 +108,9 @@
             0% {
                 transform: scale(1);
             }
-
             50% {
                 transform: scale(1.3);
             }
-
             100% {
                 transform: scale(1);
             }
@@ -146,19 +125,19 @@
             font-size: 50px;
             animation: heartbeat 1s infinite;
             z-index: 0;
-            /* Ensure hearts are behind other elements */
         }
+
         .watermark {
             position: fixed;
             bottom: 10px;
             right: 10px;
-            color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+            color: rgba(255, 255, 255, 0.5);
             font-size: 12px;
         }
-        .Title{
+
+        .Title {
             text-align: center;
         }
-        
     </style>
 </head>
 
@@ -183,24 +162,20 @@
     <div class="heart">&#10084;</div>
     <div class="watermark">Developed by Fardeen Ansari</div>
     <script>
-        const maxHeight = 400; // Not used in this code, but kept for reference
+        const maxHeight = 400;
 
         function moveTarget() {
-            // Calculate max coordinates considering container size (within container)
             const containerWidth = document.getElementById('game-container').offsetWidth;
             const containerHeight = document.getElementById('game-container').offsetHeight;
             const buttonWidth = document.getElementById('target').offsetWidth;
             const buttonHeight = document.getElementById('target').offsetHeight;
 
-            // Ensure safe movement area within container boundaries
             const maxWidth = containerWidth - buttonWidth - 20;
             const maxHeight = containerHeight - buttonHeight - 20;
 
-            // Generate random coordinates within the safe area
             const randomX = Math.floor(Math.random() * maxWidth);
             const randomY = Math.floor(Math.random() * maxHeight);
 
-            // Ensure the target stays within the container boundaries
             target.style.left = randomX + 'px';
             target.style.top = randomY + 'px';
         }
@@ -209,33 +184,25 @@
         const yesButton = document.getElementById('yes');
         const popupMessage = document.getElementById('popup-message');
 
-        // Attach event listener securely using addEventListener
         target.addEventListener('mouseenter', moveTarget);
 
-        // Event listener for 'Yes' button click
         yesButton.addEventListener('click', function () {
-            // Show popup message
             popupMessage.style.display = 'block';
 
-            // Hide popup message after 3 seconds
             setTimeout(function () {
-
-                // Start fading out animation
                 popupMessage.style.animationPlayState = 'running';
             }, 10);
 
-            // Remove popup message after animation completes
             setTimeout(function () {
                 popupMessage.style.display = 'none';
             }, 3000);
 
-            // Heart animation for an impression
             const heart = document.createElement('div');
             heart.classList.add('heart');
             document.body.appendChild(heart);
             setTimeout(() => {
                 heart.remove();
-            }, 2000); // Remove heart after 2 seconds
+            }, 2000);
         });
     </script>
 </body>
